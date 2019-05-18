@@ -6,7 +6,11 @@
   "license": "ISC",
   "scripts": {
     "start": "node lib/index",
+<<<<<<< HEAD
     "dev": "nodemon lib/index.js"
+=======
+    "dev": "nodemon --exec node lib/index.js"
+>>>>>>> remotes/origin/m3-05
   },
   "repository": {
     "type": "git",
@@ -20,8 +24,13 @@
   },
   "homepage": "https://github.com/reactjscamp/name-contests#readme",
   "dependencies": {
+<<<<<<< HEAD
     "express": "^4.17.0",
     "express-graphql": "^0.8.0",
+=======
+    "express": "^4.14.0",
+    "express-graphql": "^0.5.3",
+>>>>>>> remotes/origin/m3-05
     "graphql": "^0.6.0",
     "mongodb": "^2.1.18",
     "pg": "^6.0.1"

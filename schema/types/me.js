@@ -33,19 +33,19 @@ module.exports = new GraphQLObjectType({
         },
         contestsCount: {
             type: GraphQLInt,
-            resolve(obj, { mPool }, { fieldName }) {
+            resolve(obj, args, { mPool }, { fieldName }) {
                 return mdb(mPool).getCounts(obj, fieldName);
             }
         },
         namesCount: {
             type: GraphQLInt,
-            resolve(obj, { mPool }, { fieldName }) {
+            resolve(obj, args, { mPool }, { fieldName }) {
                 return mdb(mPool).getCounts(obj, fieldName);
             }
         },
         votesCount: {
             type: GraphQLInt,
-            resolve(obj, { mPool }, { fieldName }) {
+            resolve(obj, args, { mPool }, { fieldName }) {
                 return mdb(mPool).getCounts(obj, fieldName);
             }
         }

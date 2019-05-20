@@ -6,41 +6,45 @@ const {
   GraphQLNonNull
 } = require('graphql');
 
-const pgdb = require('../database/pgdb');
-const MeType = require('./types/me');
+// const pgdb = require('../database/pgdb');
+const UserType = require('./types/user');
 
 // The root query type is where in the data graph
 // we can start asking questions
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
-
   fields: {
-    hello: {
-      type: GraphQLString,
-      description: 'The *mandatory* hello world example, GraphQL style',
-      resolve: () => 'world'
-    }
-  },
-  fields: {
-    me: {
-      type: MeType,
+    user: {
+      type: UserType,
       description: 'The current user identified by an api key',
       args: {
         key: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve: (obj, args, { pgPool }) => {
+      resolve: (obj, args, { loaders }) => {
         // Read user information from database
         // using args.key as the api key
         // pgPool...
-        return pgdb(pgPool).getUser(args.key);
+        return loaders.usersByApiKeys.load(args.key);
+        // return pgdb(pgPool).getUserByApiKey(args.key);
       }
     }
   }
 });
 
+const AddContestMutation = require('./mutations/add-contest');
+
+const RootMutationType = new GraphQLObjectType({
+  name: 'RootMutationType',
+
+  fields: () => ({
+    AddContest: AddContestMutation,
+    // AddName: AddNameMutation
+  })
+});
+
 const ncSchema = new GraphQLSchema({
-  query: RootQueryType
-  // mutation: ...
+  query: RootQueryType,
+  mutation: RootMutationType
 });
 
 module.exports = ncSchema;

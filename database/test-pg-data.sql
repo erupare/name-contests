@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+drop view total_votes_by_name;
+>>>>>>> remotes/origin/m4-08
 drop table if exists votes;
 drop table if exists names;
 drop table if exists contests;
@@ -73,3 +77,12 @@ VALUES
 (3,FALSE,2),
 (4,TRUE,1),
 (4,TRUE,2);
+<<<<<<< HEAD
+=======
+
+create view total_votes_by_name as
+select id as name_id,
+  (select count(up) from votes v where v.name_id = n.id and up = true) as up,
+  (select count(up) from votes v where v.name_id = n.id and up = false) as down
+from names n;
+>>>>>>> remotes/origin/m4-08
